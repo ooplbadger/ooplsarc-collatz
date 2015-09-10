@@ -7,8 +7,8 @@ CPPFLAGS += -isystem $(GTEST_DIR)/include
 
 CXX        := g++
 #CXX        := g++-4.8
-CXXFLAGS   := -pedantic -std=c++11 -Wall
-#CXXFLAGS   := -pedantic -std=gnu++11 -Wall
+#CXXFLAGS   := -pedantic -std=c++11 -Wall
+CXXFLAGS   := -pedantic -std=gnu++11 -Wall
 LDFLAGS    := -lgtest -lgtest_main -pthread
 GCOV       := gcov-4.8
 GCOVFLAGS  := -fprofile-arcs -ftest-coverage
