@@ -5,8 +5,8 @@ GTEST_HEADERS = $(GTEST_DIR)/include/gtest/*.h \
 CPPFLAGS += -isystem $(GTEST_DIR)/include
 
 
-CXX        := g++
-#CXX        := g++-4.8
+#CXX        := g++
+CXX        := g++-4.8
 CXXFLAGS   := -pedantic -std=c++11 -Wall
 #CXXFLAGS   := -pedantic -std=gnu++11 -Wall
 LDFLAGS    := -lgtest -lgtest_main -pthread
