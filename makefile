@@ -46,14 +46,14 @@ status:
 test: RunCollatz.tmp TestCollatz.tmp
 
 RunCollatz: Collatz.h Collatz.c++ RunCollatz.c++ $(GTEST_HEADERS)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -L$(GTEST_DIR)/lib $(GCOVFLAGS) Collatz.c++ RunCollatz.c++ -o RunCollatz
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -L$(GTEST_DIR)/make $(GCOVFLAGS) Collatz.c++ RunCollatz.c++ -o RunCollatz
 
 RunCollatz.tmp: RunCollatz
 	./RunCollatz < RunCollatz.in > RunCollatz.tmp
 	diff RunCollatz.tmp RunCollatz.out
 
 TestCollatz: Collatz.h Collatz.c++ TestCollatz.c++ $(GTEST_HEADERS)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -L$(GTEST_DIR)/lib $(GCOVFLAGS) Collatz.c++ TestCollatz.c++ -o TestCollatz $(LDFLAGS)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -L$(GTEST_DIR)/make $(GCOVFLAGS) Collatz.c++ TestCollatz.c++ -o TestCollatz $(LDFLAGS)
 
 TestCollatz.tmp: TestCollatz
 	$(VALGRIND) ./TestCollatz                                       >  TestCollatz.tmp 2>&1
