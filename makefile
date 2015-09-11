@@ -1,14 +1,29 @@
-#GTEST_DIR = googletest
-#GTEST_HEADERS = $(GTEST_DIR)/include/gtest/*.h \
-#                $(GTEST_DIR)/include/gtest/internal/*.h
-
-#CPPFLAGS += -isystem $(GTEST_DIR)/include
+UNAME_O := $(shell uname -o)
 
 
-#CXX        := g++
-CXX        := g++-4.8
-CXXFLAGS   := -pedantic -std=c++11 -Wall
-#CXXFLAGS   := -pedantic -std=gnu++11 -Wall
+
+ifeq ($(UNAME_O), Cygwin)
+	# cygwin
+	GTEST_DIR = googletest
+	GTEST_HEADERS = $(GTEST_DIR)/include/gtest/*.h \
+			$(GTEST_DIR)/include/gtest/internal/*.h
+
+
+	CPPFLAGS += -isystem $(GTEST_DIR)/include
+	CPPFLAGS += -L$(GTEST_DIR)/make
+
+	CXX        := g++
+	CXXFLAGS   := -pedantic -std=gnu++11 -Wall
+
+else
+	# Not cygwin
+	CXX        := g++-4.8
+	CXXFLAGS   := -pedantic -std=c++11 -Wall
+
+endif
+
+
+
 LDFLAGS    := -lgtest -lgtest_main -pthread
 GCOV       := gcov-4.8
 GCOVFLAGS  := -fprofile-arcs -ftest-coverage
