@@ -59,13 +59,19 @@ int collatz_get_cycle_length_lazy_aggressive(int collatz_input)
   while (!cycle_length_map[collatz_input]) {
     if (collatz_input % 2 == 1) {
       // Odd:  n = 3n + 1
-      collatz_input = collatz_input * 3 + 1;
+      // Optimization #1 from 10 Sep 2015 class
+
+      // We make sure to mark the skipped entry as zero
+      sequence_scratch_space[cycle_length + 1] = 0;
+
+      collatz_input += (collatz_input >> 1) + 1;
+      cycle_length += 2;
     } else {
       // Even:  n = n / 2
       collatz_input >>= 1;
+      ++cycle_length;
     }
 
-    ++cycle_length;
 
     sequence_scratch_space[cycle_length] = collatz_input;
   }

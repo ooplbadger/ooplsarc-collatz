@@ -108,10 +108,10 @@ int collatz_eval_dumb (int i, int j) {
 // ------------
 
 int collatz_eval (int i, int j) {
-  return collatz_eval_dumb(i, j);
+  //  return collatz_eval_dumb(i, j);
   //  return collatz_eval_lazy(i, j);
   //  return collatz_eval_lazy_aggressive_array(i, j);
-  //  return collatz_eval_lazy_aggressive(i, j);
+  return collatz_eval_lazy_aggressive(i, j);
 }
 
 // -------------
