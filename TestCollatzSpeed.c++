@@ -41,10 +41,15 @@ TEST(CollatzBadger, read) {
 // ----
 
 
-// Max value:  1570824736
+// Max value:  1,570,824,736
 TEST(CollatzBadger, eval_1_100000) {
     const int v = collatz_eval_getbounds(1, 100000);
     ASSERT_EQ(351, v);}
+
+// Max value:  27,114,424
+TEST(CollatzBadger, eval_1_10000) {
+    const int v = collatz_eval_getbounds(1, 10000);
+    ASSERT_EQ(262, v);}
 
 
 

@@ -38,11 +38,14 @@ clean:
 	rm -f *.gcov
 	rm -f RunCollatz
 	rm -f RunCollatz.tmp
+	rm -f CollatzSpoj
 	rm -f TestCollatz
 	rm -f TestCollatz.tmp
 	rm -f TestCollatzSpeed
-	rm -f CollatzLazy.o
 	rm -f CollatzGetBounds.o
+	rm -f CollatzLazy.o
+	rm -f CollatzLazyAggressive.o
+	rm -f CollatzLazyAggressiveArray.o
 
 config:
 	git config -l
@@ -80,8 +83,14 @@ CollatzLazy.o: CollatzLazy.h CollatzLazy.c++
 CollatzLazyAggressive.o: CollatzLazyAggressive.h CollatzLazyAggressive.c++
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) -c CollatzLazyAggressive.c++
 
+CollatzLazyAggressiveArray.o: CollatzLazyAggressiveArray.h CollatzLazyAggressiveArray.c++
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) -c CollatzLazyAggressiveArray.c++
+
 #TestCollatz: Collatz.h Collatz.c++ TestCollatz.c++ CollatzLazy.o
 #	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) Collatz.c++ TestCollatz.c++ CollatzLazy.o -o TestCollatz $(LDFLAGS)
+
+#TestCollatz: Collatz.h Collatz.c++ TestCollatz.c++ CollatzLazyAggressiveArray.o
+#	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) Collatz.c++ TestCollatz.c++ CollatzLazyAggressiveArray.o -o TestCollatz $(LDFLAGS)
 
 TestCollatz: Collatz.h Collatz.c++ TestCollatz.c++ CollatzLazyAggressive.o
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) Collatz.c++ TestCollatz.c++ CollatzLazyAggressive.o -o TestCollatz $(LDFLAGS)
