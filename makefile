@@ -41,6 +41,7 @@ clean:
 	rm -f TestCollatz
 	rm -f TestCollatz.tmp
 	rm -f TestCollatzSpeed
+	rm -f CollatzLazy.o
 	rm -f CollatzGetBounds.o
 
 config:
@@ -62,6 +63,8 @@ status:
 
 test: RunCollatz.tmp TestCollatz.tmp
 
+
+#------------------------- RunCollatz
 RunCollatz: Collatz.h Collatz.c++ RunCollatz.c++
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) Collatz.c++ RunCollatz.c++ -o RunCollatz
 
@@ -69,14 +72,13 @@ RunCollatz.tmp: RunCollatz
 	./RunCollatz < RunCollatz.in > RunCollatz.tmp
 	diff RunCollatz.tmp RunCollatz.out
 
-TestCollatz: Collatz.h Collatz.c++ TestCollatz.c++
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) Collatz.c++ TestCollatz.c++ -o TestCollatz $(LDFLAGS)
 
-CollatzGetBounds.o: CollatzGetBounds.h CollatzGetBounds.c++
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) -c CollatzGetBounds.c++
+#------------------------- TestCollatz
+CollatzLazy.o: CollatzLazy.h CollatzLazy.c++
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) -c CollatzLazy.c++
 
-TestCollatzSpeed: Collatz.h Collatz.c++ TestCollatzSpeed.c++ CollatzGetBounds.o
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) Collatz.c++ TestCollatzSpeed.c++ CollatzGetBounds.o -o TestCollatzSpeed $(LDFLAGS)
+TestCollatz: Collatz.h Collatz.c++ TestCollatz.c++ CollatzLazy.o
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) Collatz.c++ TestCollatz.c++ CollatzLazy.o -o TestCollatz $(LDFLAGS)
 
 TestCollatz.tmp: TestCollatz
 	$(VALGRIND) ./TestCollatz                                       >  TestCollatz.tmp 2>&1
@@ -84,5 +86,15 @@ TestCollatz.tmp: TestCollatz
 	$(GCOV) -b TestCollatz.c++ | grep -A 5 "File 'TestCollatz.c++'" >> TestCollatz.tmp
 	cat TestCollatz.tmp
 
+
+#------------------------- TestCollatzSpeed
+CollatzGetBounds.o: CollatzGetBounds.h CollatzGetBounds.c++
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) -c CollatzGetBounds.c++
+
+TestCollatzSpeed: Collatz.h Collatz.c++ TestCollatzSpeed.c++ CollatzGetBounds.o
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) Collatz.c++ TestCollatzSpeed.c++ CollatzGetBounds.o -o TestCollatzSpeed $(LDFLAGS)
+
+
+#------------------------- CollatzSpoj
 CollatzSpoj: CollatzSpoj.c++
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) CollatzSpoj.c++ -o CollatzSpoj -pthread
