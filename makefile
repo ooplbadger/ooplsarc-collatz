@@ -68,8 +68,11 @@ test: RunCollatz.tmp TestCollatz.tmp
 
 
 #------------------------- RunCollatz
-RunCollatz: Collatz.h Collatz.c++ RunCollatz.c++
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) Collatz.c++ RunCollatz.c++ -o RunCollatz
+#RunCollatz: Collatz.h Collatz.c++ RunCollatz.c++
+#	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) Collatz.c++ RunCollatz.c++ -o RunCollatz
+
+RunCollatz: Collatz.h Collatz.c++ RunCollatz.c++ CollatzLazyAggressive.o
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) Collatz.c++ RunCollatz.c++ CollatzLazyAggressive.o -o RunCollatz
 
 RunCollatz.tmp: RunCollatz
 	./RunCollatz < RunCollatz.in > RunCollatz.tmp
