@@ -77,8 +77,14 @@ RunCollatz.tmp: RunCollatz
 CollatzLazy.o: CollatzLazy.h CollatzLazy.c++
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) -c CollatzLazy.c++
 
-TestCollatz: Collatz.h Collatz.c++ TestCollatz.c++ CollatzLazy.o
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) Collatz.c++ TestCollatz.c++ CollatzLazy.o -o TestCollatz $(LDFLAGS)
+CollatzLazyAggressive.o: CollatzLazyAggressive.h CollatzLazyAggressive.c++
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) -c CollatzLazyAggressive.c++
+
+#TestCollatz: Collatz.h Collatz.c++ TestCollatz.c++ CollatzLazy.o
+#	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) Collatz.c++ TestCollatz.c++ CollatzLazy.o -o TestCollatz $(LDFLAGS)
+
+TestCollatz: Collatz.h Collatz.c++ TestCollatz.c++ CollatzLazyAggressive.o
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) Collatz.c++ TestCollatz.c++ CollatzLazyAggressive.o -o TestCollatz $(LDFLAGS)
 
 TestCollatz.tmp: TestCollatz
 	$(VALGRIND) ./TestCollatz                                       >  TestCollatz.tmp 2>&1

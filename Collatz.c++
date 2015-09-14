@@ -14,7 +14,8 @@
 #include <string>   // getline, string
 #include <utility>  // make_pair, pair, swap
 
-#include "CollatzLazy.h"
+//#include "CollatzLazy.h"
+#include "CollatzLazyAggressive.h"
 #include "Collatz.h"
 
 using namespace std;
@@ -91,7 +92,8 @@ int collatz_eval_dumb (int i, int j) {
 
 int collatz_eval (int i, int j) {
   //  return collatz_eval_dumb(i, j);
-  return collatz_eval_lazy(i, j);
+  //  return collatz_eval_lazy(i, j);
+  return collatz_eval_lazy_aggressive(i, j);
 }
 
 // -------------
