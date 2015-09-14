@@ -38,14 +38,15 @@ int collatz_get_cycle_length_dumb(int collatz_input)
   int cycle_length = 1;
 
   while (collatz_input != 1) {
-    ++cycle_length;
-
     if (collatz_input % 2 == 1) {
       // Odd:  n = 3n + 1
-      collatz_input = collatz_input * 3 + 1;
+      // Optimization #1 from 10 Sep 2015 class
+      collatz_input += (collatz_input >> 1) + 1;
+      cycle_length += 2;
     } else {
       // Even:  n = n / 2
       collatz_input >>= 1;
+      ++cycle_length;
     }
   }
 
@@ -107,10 +108,10 @@ int collatz_eval_dumb (int i, int j) {
 // ------------
 
 int collatz_eval (int i, int j) {
-  //  return collatz_eval_dumb(i, j);
+  return collatz_eval_dumb(i, j);
   //  return collatz_eval_lazy(i, j);
   //  return collatz_eval_lazy_aggressive_array(i, j);
-  return collatz_eval_lazy_aggressive(i, j);
+  //  return collatz_eval_lazy_aggressive(i, j);
 }
 
 // -------------
