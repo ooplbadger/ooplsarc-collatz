@@ -70,8 +70,11 @@ RunCollatz.tmp: RunCollatz
 TestCollatz: Collatz.h Collatz.c++ TestCollatz.c++
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) Collatz.c++ TestCollatz.c++ -o TestCollatz $(LDFLAGS)
 
-TestCollatzSpeed: Collatz.h Collatz.c++ TestCollatzSpeed.c++
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) Collatz.c++ TestCollatzSpeed.c++ -o TestCollatzSpeed $(LDFLAGS)
+CollatzGetBounds.o: CollatzGetBounds.h CollatzGetBounds.c++
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) -c CollatzGetBounds.c++
+
+TestCollatzSpeed: Collatz.h Collatz.c++ TestCollatzSpeed.c++ CollatzGetBounds.o
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) Collatz.c++ TestCollatzSpeed.c++ CollatzGetBounds.o -o TestCollatzSpeed $(LDFLAGS)
 
 TestCollatz.tmp: TestCollatz
 	$(VALGRIND) ./TestCollatz                                       >  TestCollatz.tmp 2>&1
