@@ -6,7 +6,7 @@
 // --------
 
 #include <utility>  // swap
-#include <map>      // map
+#include <unordered_map>      // unordered_map
 
 #include "CollatzLazy.h"
 
@@ -23,10 +23,13 @@ using namespace std;
  * @return cycle length corresponding to input value
  *
  * Assume input value is valid (natural number).
+ *
+ * Note:  map is much slower than unordered_map.  In a test if 1-100,000,
+ * "map" is slower than the "dumb" approach.
  */
 int collatz_get_cycle_length_lazy(int initial_collatz_input)
 {
-  static map<int, int> cycle_length_map;
+  static unordered_map<int, int> cycle_length_map;
 
   if (cycle_length_map[initial_collatz_input]) {
     return cycle_length_map[initial_collatz_input];

@@ -43,6 +43,17 @@ TEST(CollatzBadger, eval_1_100000) {
     const int v = collatz_eval(1, 100000);
     ASSERT_EQ(351, v);}
 
+TEST(CollatzBadger, eval_1_100000_2) {
+    const int v = collatz_eval(1, 100000);
+    ASSERT_EQ(351, v);}
+
+TEST(CollatzBadger, eval_1_100000_3) {
+    const int v = collatz_eval(1, 100000);
+    ASSERT_EQ(351, v);}
+
+
+
+
 TEST(CollatzBadger, eval_1_10) {
     const int v = collatz_eval(1, 10);
     ASSERT_EQ(20, v);}
