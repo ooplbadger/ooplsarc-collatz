@@ -40,6 +40,8 @@ clean:
 	rm -f RunCollatz.tmp
 	rm -f TestCollatz
 	rm -f TestCollatz.tmp
+	rm -f TestCollatzSpeed
+	rm -f CollatzGetBounds.o
 
 config:
 	git config -l

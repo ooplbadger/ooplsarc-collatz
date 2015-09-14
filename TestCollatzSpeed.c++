@@ -17,6 +17,7 @@
 
 #include "gtest/gtest.h"
 
+#include "CollatzGetBounds.h"
 #include "Collatz.h"
 
 using namespace std;
@@ -42,7 +43,7 @@ TEST(CollatzBadger, read) {
 
 // Max value:  1570824736
 TEST(CollatzBadger, eval_1_100000) {
-    const int v = collatz_eval(1, 100000);
+    const int v = collatz_eval_getbounds(1, 100000);
     ASSERT_EQ(351, v);}
 
 

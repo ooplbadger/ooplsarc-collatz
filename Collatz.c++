@@ -15,7 +15,6 @@
 #include <utility>  // make_pair, pair, swap
 #include <map>      // map
 
-#include "CollatzGetBounds.h"
 #include "Collatz.h"
 
 using namespace std;
@@ -154,8 +153,7 @@ int collatz_eval_dumb (int i, int j) {
 // ------------
 
 int collatz_eval (int i, int j) {
-  //  return collatz_eval_lazy(i, j);
-  return collatz_eval_getbounds(i, j);
+  return collatz_eval_lazy(i, j);
 }
 
 // -------------
