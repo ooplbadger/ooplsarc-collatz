@@ -70,6 +70,9 @@ RunCollatz.tmp: RunCollatz
 TestCollatz: Collatz.h Collatz.c++ TestCollatz.c++
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) Collatz.c++ TestCollatz.c++ -o TestCollatz $(LDFLAGS)
 
+TestCollatzSpeed: Collatz.h Collatz.c++ TestCollatzSpeed.c++
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(GCOVFLAGS) Collatz.c++ TestCollatzSpeed.c++ -o TestCollatzSpeed $(LDFLAGS)
+
 TestCollatz.tmp: TestCollatz
 	$(VALGRIND) ./TestCollatz                                       >  TestCollatz.tmp 2>&1
 	$(GCOV) -b Collatz.c++     | grep -A 5 "File 'Collatz.c++'"     >> TestCollatz.tmp
