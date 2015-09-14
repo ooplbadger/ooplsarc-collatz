@@ -90,6 +90,21 @@ int collatz_eval_lazy_aggressive (int i, int j) {
     swap(i, j);
   }
 
+
+  //-------------------------
+  // Optimization #2 from 10 Sep 2015 class:
+  //   Given positive integers, b and e,
+  //   let m = (e/2) + 1.
+  //   
+  //   If b < m, then
+  //   mcl(b, e) = mcl(m, e).
+  int mid = j/2 + 1;
+  if (i < mid) {
+    i = mid;
+  }
+
+
+  //-------------------------
   int max_cycle_length = 1;
   for (auto collatz_input = i; collatz_input <= j; collatz_input++) {
     int current_cycle_length = collatz_get_cycle_length_lazy_aggressive(collatz_input);

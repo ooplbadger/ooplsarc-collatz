@@ -74,6 +74,8 @@ int collatz_eval_dumb (int i, int j) {
     swap(i, j);
   }
 
+
+  //-------------------------
   // Optimization #2 from 10 Sep 2015 class:
   //   Given positive integers, b and e,
   //   let m = (e/2) + 1.
@@ -86,6 +88,7 @@ int collatz_eval_dumb (int i, int j) {
   }
   
 
+  //-------------------------
   int max_cycle_length = 1;
   for (auto collatz_input = i; collatz_input <= j; collatz_input++) {
     int current_cycle_length = collatz_get_cycle_length_dumb(collatz_input);
@@ -104,10 +107,10 @@ int collatz_eval_dumb (int i, int j) {
 // ------------
 
 int collatz_eval (int i, int j) {
-  return collatz_eval_dumb(i, j);
+  //  return collatz_eval_dumb(i, j);
   //  return collatz_eval_lazy(i, j);
   //  return collatz_eval_lazy_aggressive_array(i, j);
-  //  return collatz_eval_lazy_aggressive(i, j);
+  return collatz_eval_lazy_aggressive(i, j);
 }
 
 // -------------
